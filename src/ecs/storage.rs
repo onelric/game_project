@@ -1,3 +1,5 @@
+// Might or might not be borrowed from the experimental features in macroquad
+
 use std::any::{Any, TypeId};
 
 use std::collections::HashMap;
