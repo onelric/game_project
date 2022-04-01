@@ -37,8 +37,8 @@ pub fn update_player_states(world: &mut World) {
 
         if health.dead() {
             *state = PlayerState::Dead;
+            std::thread::sleep(std::time::Duration::from_millis(500));
+            std::process::exit(1)
         }
-
-        println!("{:#?}", state);
     }
 }

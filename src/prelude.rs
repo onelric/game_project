@@ -17,6 +17,6 @@ pub use rand::{thread_rng, Rng};
 pub use core::{config::Config, transform::Transform};
 
 pub use crate::{
-    animator::*, ecs::runner::*, ecs::storage, entity::birdenemy::*, entity::enemy::*, entity::health::*, entity::*, eventhandler::*, game::hud::*,
-    game::map::*, game::particles::*, gamestate::*, physics::*, player::*, states::*, utilities::*, window::*,
+    animator::*, ecs::runner::*, ecs::storage, entity::birdenemy::*, entity::enemy::*, entity::health::*, entity::*, eventhandler::*,
+    game::cannon::*, game::hud::*, game::map::*, game::particles::*, gamestate::*, physics::*, player::*, states::*, utilities::*, window::*,
 };

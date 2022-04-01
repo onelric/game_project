@@ -16,6 +16,8 @@ impl State for GameState {
         spawn_player(world, DVec2::new(160.0, 50.0));
         spawn_bird(world);
 
+        spawn_cannon(world);
+
         let mut hud = Hud::new();
 
         hud.add_element(
@@ -49,6 +51,8 @@ impl State for GameState {
             // Enemy systems
             .with(bird_state_system)
             .with(bird_ai_system)
+            // Other entities
+            .with(cannon_systems)
             .build();
 
         Self { runner }

@@ -6,6 +6,7 @@
 - implement parallel iteration using rayon
 - animations through texture swapping
 - putting enemy data into json for modularity and quicker changing of values
+- switch rendering framework to ggez or macroquad
 
 ## goody stuff
 

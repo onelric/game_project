@@ -3,17 +3,17 @@
 use crate::prelude::{ButtonArgs, Config, Context, Event, GlGraphics, RenderArgs, UpdateArgs, World};
 
 pub trait State {
-    fn new(world: &mut hecs::World) -> Self
+    fn new(world: &mut World) -> Self
     where
         Self: Sized;
 
-    fn update(&mut self, args: UpdateArgs, world: &mut hecs::World) {}
+    fn update(&mut self, args: UpdateArgs, world: &mut World) {}
 
-    fn render(&mut self, c: Context, gl: &mut GlGraphics, args: RenderArgs, world: &mut hecs::World) {}
+    fn render(&mut self, c: Context, gl: &mut GlGraphics, args: RenderArgs, world: &mut World) {}
 
-    fn input(&mut self, args: ButtonArgs, world: &mut hecs::World) {}
+    fn input(&mut self, args: ButtonArgs, world: &mut World) {}
 
-    fn events(&mut self, event: &Event, world: &mut hecs::World) {}
+    fn events(&mut self, event: &Event, world: &mut World) {}
 }
 
 pub struct StateHandler {
@@ -23,7 +23,7 @@ pub struct StateHandler {
 }
 
 impl StateHandler {
-    pub fn new<T>(gl: GlGraphics, world: &mut hecs::World) -> Self
+    pub fn new<T>(gl: GlGraphics, world: &mut World) -> Self
     where
         T: State + 'static,
     {
@@ -34,13 +34,13 @@ impl StateHandler {
         }
     }
 
-    pub fn update(&mut self, args: UpdateArgs, world: &mut hecs::World) {
+    pub fn update(&mut self, args: UpdateArgs, world: &mut World) {
         if !self.states.is_empty() {
             self.states[self.state].update(args, world)
         }
     }
 
-    pub fn render(&mut self, args: RenderArgs, world: &mut hecs::World) {
+    pub fn render(&mut self, args: RenderArgs, world: &mut World) {
         let config = crate::prelude::storage::get::<Config>();
 
         let mut viewport = args.viewport();
@@ -55,26 +55,26 @@ impl StateHandler {
         });
     }
 
-    pub fn input(&mut self, args: ButtonArgs, world: &mut hecs::World) {
+    pub fn input(&mut self, args: ButtonArgs, world: &mut World) {
         if !self.states.is_empty() {
             self.states[self.state].input(args, world)
         }
     }
 
-    pub fn events(&mut self, event: &Event, world: &mut hecs::World) {
+    pub fn events(&mut self, event: &Event, world: &mut World) {
         if !self.states.is_empty() {
             self.states[self.state].events(event, world)
         }
     }
 
-    pub fn push<T>(&mut self, world: &mut hecs::World)
+    pub fn push<T>(&mut self, world: &mut World)
     where
         T: State + 'static,
     {
         self.states.push(Box::new(T::new(world)));
     }
 
-    pub fn push_and_set<T>(&mut self, world: &mut hecs::World)
+    pub fn push_and_set<T>(&mut self, world: &mut World)
     where
         T: State + 'static,
     {
@@ -84,7 +84,7 @@ impl StateHandler {
         self.state = self.states.len() - 1;
     }
 
-    pub fn change_state(&mut self, state: usize, world: &mut hecs::World) {
+    pub fn change_state(&mut self, state: usize, world: &mut World) {
         world.clear();
         self.state = state;
     }
